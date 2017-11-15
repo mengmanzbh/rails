@@ -16,7 +16,7 @@ module Rails
                     :ssl_options, :public_file_server,
                     :session_options, :time_zone, :reload_classes_only_on_change,
                     :beginning_of_week, :filter_redirect, :x, :enable_dependency_loading,
-                    :read_encrypted_secrets, :log_level
+                    :read_encrypted_secrets, :log_level, :content_security_policies
 
       attr_reader :encoding, :api_only
 
@@ -54,6 +54,7 @@ module Rails
         @x                               = Custom.new
         @enable_dependency_loading       = false
         @read_encrypted_secrets          = false
+        @content_security_policies       = ActionController::ContentSecurity::PolicyCollection.new
       end
 
       def load_defaults(target_version)
@@ -104,6 +105,10 @@ module Rails
 
           if respond_to?(:action_controller)
             action_controller.default_protect_from_forgery = true
+          end
+
+          if respond_to?(:action_controller)
+            action_controller.default_protect_content = true
           end
 
         else

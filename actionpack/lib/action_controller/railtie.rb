@@ -80,6 +80,16 @@ module ActionController
       end
     end
 
+    initializer "action_controller.content_security" do |app|
+      ActiveSupport.on_load(:action_controller_base) do
+        self.content_security_policies = app.config.content_security_policies
+
+        if app.config.action_controller.default_protect_content
+          protect_content policy: :application
+        end
+      end
+    end
+
     initializer "action_controller.eager_load_actions" do
       ActiveSupport.on_load(:after_initialize) do
         ActionController::Metal.descendants.each(&:action_methods) if config.eager_load

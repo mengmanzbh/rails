@@ -1,0 +1,21 @@
+# Define application-wide content security policies
+# For further information see the following documentation
+# https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
+
+Rails.application.config.content_security_policies.build do
+  policy :application do |p|
+    p.default_src :self, :https
+    p.font_src    :self, :https, :data
+    p.img_src     :self, :https, :data
+    p.object_src  :none
+    p.script_src  :self, :https
+    p.style_src   :self, :https, :unsafe_inline
+  end
+
+  # Report CSP violations to the specified URI
+  # For further information see the following documentation:
+  # https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy-Report-Only
+  policy :report_only, using: :application do |p|
+    p.report_only!(uri: "/csp-violation-report-endpoint")
+  end
+end
