@@ -225,7 +225,7 @@ module ActionController
       Flash,
       FormBuilder,
       RequestForgeryProtection,
-      ContentSecurity,
+      ContentSecurityPolicy,
       ForceSSL,
       Streaming,
       DataStreaming,
