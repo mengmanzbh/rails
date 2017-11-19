@@ -62,6 +62,7 @@ and may also be used independently outside Rails.
 
         $ cd myapp
         $ rails server
+        (远程主机可以访问)
         $ rails server -b 0.0.0.0
 
    Run with `--help` or `-h` for options.
