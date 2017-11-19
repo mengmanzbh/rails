@@ -62,6 +62,7 @@ and may also be used independently outside Rails.
 
         $ cd myapp
         $ rails server
+        $ rails server -b 0.0.0.0
 
    Run with `--help` or `-h` for options.
 
